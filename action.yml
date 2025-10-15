@@ -22,4 +22,4 @@ runs:
       env:
         ZARR_CLI: ${{ inputs.zarr-cli }}
       run: |
-        bats tests.sh
+        bats ${GITHUB_ACTION_PATH}/tests.sh
