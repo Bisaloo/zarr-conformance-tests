@@ -1,0 +1,25 @@
+name: "Run conformance tests"
+description: "Composite action that installs the Bats testing framework and runs zarr conformance tests."
+inputs:
+  zarr-cli:
+    description: "Command to expose as the ZARR_CLI environment variable (e.g. 'Rscript main.R')"
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - name: "Checkout repository"
+      uses: actions/checkout@v5
+
+    - name: "Install testing framework"
+      shell: bash
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y bats
+
+    - name: "Run conformance tests"
+      shell: bash
+      env:
+        ZARR_CLI: ${{ inputs.zarr-cli }}
+      run: |
+        ./zarr-conformance-tests/tests.sh
