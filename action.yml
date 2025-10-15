@@ -21,5 +21,6 @@ runs:
       shell: bash
       env:
         ZARR_CLI: ${{ inputs.zarr-cli }}
+        ZARR_CONFORMANCE_DATA: ${{ github.action_path }}/data
       run: |
         bats ${GITHUB_ACTION_PATH}/tests.sh
