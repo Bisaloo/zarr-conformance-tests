@@ -22,4 +22,4 @@ runs:
       env:
         ZARR_CLI: ${{ inputs.zarr-cli }}
       run: |
-        ./zarr-conformance-tests/tests.sh
+        bats tests.sh
