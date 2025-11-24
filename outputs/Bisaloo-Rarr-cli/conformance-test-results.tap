@@ -1,0 +1,9 @@
+1..6
+ok 1 read int64 - v2
+ok 2 read int32 - v2
+not ok 3 read int32 - v3
+# (in test file /home/runner/work/_actions/Bisaloo/zarr-conformance-tests/main/tests.sh, line 15)
+#   `[ "$status" -eq 0 ]' failed
+ok 4 read float64 - v2
+ok 5 read float32 - v2
+ok 6 read bool - v2
