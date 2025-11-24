@@ -11,6 +11,12 @@ to the Zarr specification.
 **This is only a proof of concept at this stage.**
 **Please see the roadmap issue to learn what is needed to make this usable in practice.**
 
+## Output of the conformance tests
+
+The output of the conformance tests is visible on the [Zarr implementations](http://hugogruson.fr/zarr-conformance-tests/) page.
+
+Please read below for background on how this works and how to add a new implementation.
+
 ## Design considerations
 
 ### Requirements
