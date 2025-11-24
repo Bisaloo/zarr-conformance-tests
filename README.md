@@ -21,6 +21,8 @@ to the Zarr specification.
   particular Zarr implementation. It should be future-proof in the sense that
   any new Zarr implementation should be able to use it without requiring changes
   in this repository.
+- We should avoid running potentially untrusted code from arbitrary Zarr
+  implementations in the CI of this repository.
 
 ### Consequences
 
@@ -31,15 +33,21 @@ to the Zarr specification.
   - installs their tools and its dependencies
   - provides the CLI interface path as the `zarr-cli` input in the GitHub Action
   - runs the GitHub Action defined in this repository
+- We do not run the conformance tests here but we gather conformance test runs 
+  from each individual implementation listed in `implementations.json`.
 
 ## Repository structure
 
 ```
 .
+├── .github/workflows/
+│   └── collect-conformance-tap-outputs.yml      # GHA workflow to collect the conformance test results from each implementation
 ├── README.md
-├── action.yml      # GitHub Action to be used in CI workflows of Zarr implementations
-├── data/           # Test data files used in the tests
-└── tests.sh        # Definition of the tests and expectations, using the bats framework
+├── action.yml                 # GitHub Action to be used in CI workflows of Zarr implementations
+├── data/                      # Test data files used in the tests
+├── implementations.json       # List of Zarr implementations compared in the conformance tests
+├── outputs/                   # Collected test results from each implementation
+└── tests.sh                   # Definition of the tests and expectations, using the bats framework
 ```
 
 ## Usage
