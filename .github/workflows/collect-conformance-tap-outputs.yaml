@@ -21,19 +21,11 @@ jobs:
           # For each implementation, get the latest artifact named 'conformance-test-results' and download it
           jq -r '.[].cli_repo' implementations.json | while IFS= read -r repo; do
             echo "Processing $repo"
-            archive_url=$(gh api "repos/$repo/actions/artifacts" --jq '.artifacts | map(select(.name=="conformance-test-results")) | sort_by(.created_at) | last | .archive_download_url' || true)
-            if [ -z "${archive_url:-}" ] || [ "${archive_url}" = "null" ]; then
-              echo "No 'conformance-test-results' artifact found for $repo"
-              continue
-            fi
             slug=${repo//\//-}
-            out="outputs/${slug}-conformance.zip"
-
-            echo "Downloading artifact from ${archive_url}"
-            curl -L -H "Accept: application/zip" "${archive_url}" --output "${out}"
-            echo "Saved ${out}"
-            unzip "${out}"
-            rm "${out}"
+            mkdir -p outputs/$slug
+            cd outputs/$slug
+            gh run download -n conformance-test-results -R "$repo"
+            cd ../..
           done
       
       - name: Commit collected TAP files
