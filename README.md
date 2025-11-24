@@ -46,7 +46,7 @@ to the Zarr specification.
 
 1. Create a minimal CLI wrapper around your implementation defining the
    following actions/verbs:
-   - TDB
+   - TBD
 2. Create the following GitHub Actions workflow file in your Zarr implementation
    repository:
 
