@@ -31,6 +31,7 @@ runs:
         bats --tap ${GITHUB_ACTION_PATH}/tests.sh > conformance-test-results.tap
 
     - name: "Upload test results"
+      if: always()
       uses: actions/upload-artifact@v5
       with:
         name: conformance-test-results
