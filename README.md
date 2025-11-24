@@ -46,7 +46,9 @@ to the Zarr specification.
 ├── action.yml                 # GitHub Action to be used in CI workflows of Zarr implementations
 ├── data/                      # Test data files used in the tests
 ├── implementations.json       # List of Zarr implementations compared in the conformance tests
+├── index.qmd                  # Website page displayed the collected test results
 ├── outputs/                   # Collected test results from each implementation
+├── _quarto.yml                # Quarto website configuration
 └── tests.sh                   # Definition of the tests and expectations, using the bats framework
 ```
 

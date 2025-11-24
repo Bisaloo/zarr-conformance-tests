@@ -1,0 +1,63 @@
+---
+title: "Zarr features supported by different implementations"
+---
+
+```{r}
+#| echo: false
+read_tap <- function(path) {
+  lines <- readLines(path)
+
+  # Number of tests. FIXME: take this into account in the future.
+  lines <- lines[-1]
+
+  tests <- lines[!startsWith(lines, "#")]
+
+  status <- gsub("((not )?ok) .*", "\\1", tests)
+  test_number <- as.integer(gsub("((not )?ok) ([0-9]+).*", "\\3", tests))
+  test_name <- gsub("((not )?ok) ([0-9]+) (.*)", "\\4", tests)
+
+  data.frame(
+    test_number = test_number,
+    test_name = test_name,
+    status = status,
+    stringsAsFactors = FALSE
+  )
+}
+```
+
+```{r}
+#| echo: false
+taps <- fs::dir_ls("outputs", recurse = TRUE, regexp = "\\.tap$") |> 
+  rlang::set_names(~ vapply(strsplit(.x, "/", fixed = TRUE), `[[`, 2, FUN.VALUE = character(1))) |> 
+  purrr::imap(function(implementation_tap, implementation_name) {
+    read_tap(implementation_tap) |> 
+      dplyr::rename(!!implementation_name := status)
+  })
+merged_tap <- purrr::reduce(taps, dplyr::full_join, by = c("test_number", "test_name"))
+```
+
+```{r}
+#| echo: false
+merged_tap |> 
+  gt::gt() |> 
+  gt::cols_label(
+    test_number = "Test #",
+    test_name = "Test Name"
+  ) |> 
+  gt::tab_header(
+    title = "Test Results Across Implementations"
+  ) |> 
+  gt::fmt_markdown(
+    columns = dplyr::everything()
+  ) |> 
+  gt::data_color(
+    columns = -dplyr::any_of(c("test_number", "test_name")),
+    fn = scales::col_factor(
+      palette = c(
+        "ok" = "lightgreen",
+        "not ok" = "salmon"
+      ),
+      domain = c("ok", "not ok")
+    )
+  )
+```
