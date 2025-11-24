@@ -30,7 +30,7 @@ jobs:
             out="outputs/${slug}-conformance.zip"
 
             echo "Downloading artifact from ${archive_url}"
-            curl -L -H "Authorization: Bearer ${GITHUB_TOKEN}" -H "Accept: application/zip" "${archive_url}" --output "${out}"
+            curl -L -H "Accept: application/zip" "${archive_url}" --output "${out}"
             echo "Saved ${out}"
             unzip "${out}"
             rm "${out}"
