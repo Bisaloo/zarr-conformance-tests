@@ -1,0 +1,45 @@
+name: collect-conformance-tap-outputs
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Collect latest 'conformance-test-results' artifact from each implementation
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # For each implementation, get the latest artifact named 'conformance-test-results' and download it
+          jq -r '.[].cli_repo' implementations.json | while IFS= read -r repo; do
+            echo "Processing $repo"
+            archive_url=$(gh api "repos/$repo/actions/artifacts" --jq '.artifacts | map(select(.name=="conformance-test-results")) | sort_by(.created_at) | last | .archive_download_url' || true)
+            if [ -z "${archive_url:-}" ] || [ "${archive_url}" = "null" ]; then
+              echo "No 'conformance-test-results' artifact found for $repo"
+              continue
+            fi
+            slug=${repo//\//-}
+            out="outputs/${slug}-conformance.zip"
+
+            echo "Downloading artifact from ${archive_url}"
+            curl -L -H "Authorization: Bearer ${GITHUB_TOKEN}" -H "Accept: application/zip" "${archive_url}" --output "${out}"
+            echo "Saved ${out}"
+            unzip "${out}"
+            rm "${out}"
+          done
+      
+      - name: Commit collected TAP files
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add outputs/*.tap
+          git commit -m "Collect conformance test TAP outputs" || echo "No changes to commit"
+          git push origin HEAD:main

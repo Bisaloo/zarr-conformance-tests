@@ -1,0 +1,15 @@
+[
+  {
+    "name": "Rarr",
+    "repo": "Huber-group-EMBL/Rarr",
+    "language": "R",
+    "cli_repo": "Bisaloo/Rarr-cli"
+  },
+  {
+    "name": "zarr",
+    "repo": "zarr-developers/zarr-python",
+    "language": "Python",
+    "cli_repo": "Bisaloo/zarr-python-cli"
+  }
+]
+ 
