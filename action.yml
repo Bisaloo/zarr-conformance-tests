@@ -16,6 +16,11 @@ runs:
       run: |
         sudo apt-get update
         sudo apt-get install -y bats
+    
+    - name: "Prepare saving results"
+      shell: bash
+      run: |
+        mkdir -p conformance-tests
 
     - name: "Run conformance tests"
       shell: bash
@@ -23,4 +28,10 @@ runs:
         ZARR_CLI: ${{ inputs.zarr-cli }}
         ZARR_CONFORMANCE_DATA: ${{ github.action_path }}/data
       run: |
-        bats ${GITHUB_ACTION_PATH}/tests.sh
+        bats --tap ${GITHUB_ACTION_PATH}/tests.sh > conformance-test-results.tap
+
+    - name: "Upload test results"
+      uses: actions/upload-artifact@v5
+      with:
+        name: conformance-test-results
+        path: conformance-test-results.tap
