@@ -18,11 +18,13 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           # For each implementation, get the latest artifact named 'conformance-test-results' and download it
-          jq -r '.[].cli_repo' implementations.json | while IFS= read -r repo; do
-            echo "Processing $repo"
-            slug=${repo//\//-}
-            mkdir -p outputs/$slug
-            cd outputs/$slug
+          # Use the `name` field from implementations.json for the output directory
+          jq -c '.[]' implementations.json | while IFS= read -r item; do
+            repo=$(jq -r '.cli_repo' <<< "$item")
+            name=$(jq -r '.name' <<< "$item")
+            echo "Processing $repo (name: $name)"
+            mkdir -p "outputs/$name"
+            cd "outputs/$name"
             gh run download -n conformance-test-results -R "$repo"
             cd ../..
           done
