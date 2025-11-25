@@ -1,0 +1,1 @@
+Sitemap: https://Bisaloo.github.io/zarr-conformance-tests/sitemap.xml
