@@ -3,13 +3,15 @@
     "name": "Rarr",
     "repo": "Huber-group-EMBL/Rarr",
     "language": "R",
-    "cli_repo": "Bisaloo/Rarr-cli"
+    "cli_repo": "Bisaloo/Rarr-cli",
+    "conformance_workflow": "conformance-ci.yaml" 
   },
   {
     "name": "zarr",
     "repo": "zarr-developers/zarr-python",
     "language": "Python",
-    "cli_repo": "Bisaloo/zarr-python-cli"
+    "cli_repo": "Bisaloo/zarr-python-cli",
+    "conformance_workflow": "conformance-tests.yaml"
   }
 ]
  

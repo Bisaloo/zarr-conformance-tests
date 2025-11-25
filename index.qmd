@@ -16,40 +16,33 @@ read_tap <- function(path) {
   test_number <- as.integer(gsub("((not )?ok) ([0-9]+).*", "\\3", tests))
   test_name <- gsub("((not )?ok) ([0-9]+) (.*)", "\\4", tests)
 
-  data.frame(
-    test_number = test_number,
-    test_name = test_name,
-    status = factor(status, levels = c("ok", "not ok")),
-    stringsAsFactors = FALSE
+  setNames(
+    factor(status, levels = c("ok", "not ok")),
+    test_name
   )
 }
 ```
 
 ```{r}
 #| echo: false
-taps <- fs::dir_ls("outputs", recurse = TRUE, regexp = "\\.tap$") |> 
-  rlang::set_names(~ vapply(strsplit(.x, "/", fixed = TRUE), `[[`, 2, FUN.VALUE = character(1))) |> 
-  purrr::imap(function(implementation_tap, implementation_name) {
-    read_tap(implementation_tap) |> 
-      dplyr::rename(!!implementation_name := status)
+taps <- fs::dir_ls("outputs") |> 
+  rlang::set_names(~ basename(.x)) |> 
+  purrr::imap(function(implementation_path, implementation_name) {
+    tap <- read_tap(file.path(implementation_path, "conformance-test-results.tap"))
+    metadata <- jsonlite::read_json(file.path(implementation_path, "last-run-metadata.json"), simplify = TRUE)
+    data.frame(implementation = implementation_name, metadata, as.list(tap), check.names = FALSE)
   })
-merged_tap <- purrr::reduce(taps, dplyr::full_join, by = c("test_number", "test_name")) |> 
-  dplyr::select(-test_number) |> 
-  # transpose
-  tidyr::pivot_longer(
-    cols = -test_name,
-    names_to = "implementation",
-    values_to = "status"
-  ) |> 
-  tidyr::pivot_wider(
-    names_from = test_name,
-    values_from = status
-  )
+merged_tap <- dplyr::bind_rows(taps)
 ```
 
 ```{r}
 #| echo: false
 merged_tap |> 
+  dplyr::mutate(
+    `last run` = glue::glue("[{format(as.POSIXct(createdAt))}]({url})"),
+    .after = 1,
+    .keep = "unused"
+  ) |> 
   gt::gt() |> 
   gt::tab_header(
     title = "Test Results Across Implementations"
@@ -58,7 +51,7 @@ merged_tap |>
     columns = dplyr::everything()
   ) |> 
   gt::data_color(
-    columns = -implementation,
+    columns = -dplyr::any_of(c("implementation", "last run")),
     palette = c(
       "ok" = "lightgreen",
       "not ok" = "salmon"

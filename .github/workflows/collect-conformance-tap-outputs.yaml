@@ -22,10 +22,14 @@ jobs:
           jq -c '.[]' implementations.json | while IFS= read -r item; do
             repo=$(jq -r '.cli_repo' <<< "$item")
             name=$(jq -r '.name' <<< "$item")
+            workflow=$(jq -r '.conformance_workflow' <<< "$item")
             echo "Processing $repo (name: $name)"
             mkdir -p "outputs/$name"
             cd "outputs/$name"
+            # Save test output (TAP file)
             gh run download -n conformance-test-results -R "$repo"
+            # Save last run metadata (link and date)
+            gh run list -R "$repo" -w "$workflow" --limit 1 --json createdAt,url >| last-run-metadata.json
             cd ../..
           done
       
