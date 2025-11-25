@@ -27,6 +27,10 @@ Please read below for background on how this works and how to add a new implemen
   particular Zarr implementation. It should be future-proof in the sense that
   any new Zarr implementation should be able to use it without requiring changes
   in this repository.
+- Each implementation should be in charge of installing their dependencies and
+  implementation in the standard way for their language. It is not scalable for
+  a limited number of maintainers in this repository to try to handle any
+  possible language and dependency management system.
 - We should avoid running potentially untrusted code from arbitrary Zarr
   implementations in the CI of this repository.
 
