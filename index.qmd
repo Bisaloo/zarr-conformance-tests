@@ -33,17 +33,24 @@ taps <- fs::dir_ls("outputs", recurse = TRUE, regexp = "\\.tap$") |>
     read_tap(implementation_tap) |> 
       dplyr::rename(!!implementation_name := status)
   })
-merged_tap <- purrr::reduce(taps, dplyr::full_join, by = c("test_number", "test_name"))
+merged_tap <- purrr::reduce(taps, dplyr::full_join, by = c("test_number", "test_name")) |> 
+  dplyr::select(-test_number) |> 
+  # transpose
+  tidyr::pivot_longer(
+    cols = -test_name,
+    names_to = "implementation",
+    values_to = "status"
+  ) |> 
+  tidyr::pivot_wider(
+    names_from = test_name,
+    values_from = status
+  )
 ```
 
 ```{r}
 #| echo: false
 merged_tap |> 
   gt::gt() |> 
-  gt::cols_label(
-    test_number = "Test #",
-    test_name = "Test Name"
-  ) |> 
   gt::tab_header(
     title = "Test Results Across Implementations"
   ) |> 
@@ -51,7 +58,7 @@ merged_tap |>
     columns = dplyr::everything()
   ) |> 
   gt::data_color(
-    columns = -dplyr::any_of(c("test_number", "test_name")),
+    columns = -implementation,
     palette = c(
       "ok" = "lightgreen",
       "not ok" = "salmon"
