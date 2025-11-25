@@ -19,7 +19,7 @@ read_tap <- function(path) {
   data.frame(
     test_number = test_number,
     test_name = test_name,
-    status = status,
+    status = factor(status, levels = c("ok", "not ok")),
     stringsAsFactors = FALSE
   )
 }
@@ -52,12 +52,9 @@ merged_tap |>
   ) |> 
   gt::data_color(
     columns = -dplyr::any_of(c("test_number", "test_name")),
-    fn = scales::col_factor(
-      palette = c(
-        "ok" = "lightgreen",
-        "not ok" = "salmon"
-      ),
-      domain = c("ok", "not ok")
-    )
+    palette = c(
+      "ok" = "lightgreen",
+      "not ok" = "salmon"
+    )  
   )
 ```
