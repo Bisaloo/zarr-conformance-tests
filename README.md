@@ -51,7 +51,8 @@ Please read below for background on how this works and how to add a new implemen
 ```
 .
 ├── .github/workflows/
-│   └── collect-conformance-tap-outputs.yml      # GHA workflow to collect the conformance test results from each implementation
+│   ├── build-deploy-quarto.yaml                  # GHA workflow to render the quarto page with the collected test results
+│   └── collect-conformance-tap-outputs.yaml      # GHA workflow to collect the conformance test results from each implementation
 ├── README.md
 ├── action.yml                 # GitHub Action to be used in CI workflows of Zarr implementations
 ├── data/                      # Test data files used in the tests
