@@ -12,6 +12,13 @@
     "language": "Python",
     "cli_repo": "Bisaloo/zarr-python-cli",
     "conformance_workflow": "conformance-tests.yaml"
+  },
+  {
+    "name": "zarrs",
+    "repo": "zarrs/zarrs",
+    "language": "Rust",
+    "cli_repo": "zarrs/zarrs",
+    "conformance_workflow": "conformance.yaml"
   }
 ]
  
