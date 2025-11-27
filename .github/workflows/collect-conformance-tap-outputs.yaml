@@ -29,6 +29,8 @@ jobs:
             echo "Processing $repo (name: $name)"
             mkdir -p "outputs/$name"
             cd "outputs/$name"
+            # Overwrite existing results
+            rm conformance-test-results.tap
             # Save test output (TAP file)
             gh run download -n conformance-test-results -R "$repo"
             # Save last run metadata (link and date)
