@@ -30,7 +30,7 @@ jobs:
             mkdir -p "outputs/$name"
             cd "outputs/$name"
             # Overwrite existing results
-            rm conformance-test-results.tap
+            find . -name conformance-test-results.tap -type f -delete
             # Save test output (TAP file)
             gh run download -n conformance-test-results -R "$repo"
             # Save last run metadata (link and date)
