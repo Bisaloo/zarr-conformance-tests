@@ -1,4 +1,6 @@
-#! /bin/env bash
+#!/usr/bin/env bats
+
+set -eu
 
 @test "read int64 - v2" {
   run $ZARR_CLI --array_path=$ZARR_CONFORMANCE_DATA/int64.zarr
