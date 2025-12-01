@@ -4,6 +4,13 @@ inputs:
   zarr-cli:
     description: "Command to expose as the ZARR_CLI environment variable (e.g. 'Rscript main.R')"
     required: true
+  bats_filter_tags:
+    description: |
+      A BATS filter command formatted ad documented in https://bats-core.readthedocs.io/en/stable/writing-tests.html#filtering-execution.
+      For example, bats_filter_tags: "!v3" will exclude all tests tagged with 'v3'.
+      An empty value (the default) will run all tests.
+    required: false
+    default: ""
 
 runs:
   using: "composite"
@@ -22,8 +29,13 @@ runs:
       env:
         ZARR_CLI: ${{ inputs.zarr-cli }}
         ZARR_CONFORMANCE_DATA: ${{ github.action_path }}/data
+        BATS_FILTER_TAGS: ${{ inputs.bats_filter_tags }}
       run: |
-        bats --tap ${GITHUB_ACTION_PATH}/tests.sh > conformance-test-results.tap
+        if [ -n "${BATS_FILTER_TAGS}" ]; then
+          bats --tap ${GITHUB_ACTION_PATH}/tests.sh --filter-tags "${BATS_FILTER_TAGS}" > conformance-test-results.tap
+        else
+          bats --tap ${GITHUB_ACTION_PATH}/tests.sh > conformance-test-results.tap
+        fi
 
     - name: "Upload test results"
       if: always()
