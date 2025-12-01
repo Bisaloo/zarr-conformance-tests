@@ -36,6 +36,7 @@ jobs:
     - uses: r-lib/actions/setup-pandoc@v2
 
     - name: Publish to GitHub Pages (and render)
+      if: github.event_name != 'pull_request'
       uses: quarto-dev/quarto-actions/publish@v2
       with:
         target: gh-pages
