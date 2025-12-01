@@ -5,9 +5,19 @@ on:
   pull_request:
     branches:
       - main
+    paths:
+      - '**.qmd'
+      - '_quarto.yml'
+      - 'outputs/**'
+      - '.github/workflows/**'
   push:
     branches:
       - main
+    paths:
+      - '**.qmd'
+      - '_quarto.yml'
+      - 'outputs/**'
+      - '.github/workflows/**'
 
 permissions:
   contents: write
