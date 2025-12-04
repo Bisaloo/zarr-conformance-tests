@@ -89,7 +89,7 @@ jobs:
       - name: Install implementation and its dependencies
       # Customize this step to install the tool being tested
 
-      - uses: Bisaloo/zarr-conformance-tests@main
+      - uses: Bisaloo/zarr-conformance-tests@v0.0.1
         with:
           zarr-cli: # Provide the path to the CLI wrapper for your implementation
 ```
