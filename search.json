@@ -4,6 +4,6 @@
     "href": "index.html",
     "title": "Zarr features supported by different implementations",
     "section": "",
-    "text": "Test Results Across Implementations\n\n\nimplementation\nlast run\nread int64 - v2\nread int32 - v2\nread int32 - v3\nread float64 - v2\nread float32 - v2\nread bool - v2\n\n\n\n\nRarr\n2025-12-07\nok\nok\nok\nok\nok\nok\n\n\nzarr\n2025-12-07\nok\nok\nok\nok\nok\nok\n\n\nzarrs\n2025-12-07\nok\nok\nok\nok\nok\nok"
+    "text": "Test Results Across Implementations\n\n\nimplementation\nlast run\nread int64 - v2\nread int32 - v2\nread int32 - v3\nread float64 - v2\nread float32 - v2\nread bool - v2\n\n\n\n\nRarr\n2025-12-14\nok\nok\nok\nok\nok\nok\n\n\nzarr\n2025-12-14\nok\nok\nok\nok\nok\nok\n\n\nzarrs\n2025-12-14\nok\nok\nok\nok\nok\nok"
   }
 ]
