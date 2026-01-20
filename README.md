@@ -99,5 +99,5 @@ jobs:
 Live examples of the conformance tests being run against an actual
 implementation can be found in the following repositories:
 
-- [Rarr R implementation](https://github.com/Bisaloo/Rarr-cli)
+- [Rarr R implementation](https://github.com/Huber-group-EMBL/Rarr)
 - [Zarr python implementation (unofficial minimal CLI wrapper around the official lib)](https://github.com/Bisaloo/zarr-python-cli)

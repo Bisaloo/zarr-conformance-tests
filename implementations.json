@@ -3,7 +3,7 @@
     "name": "Rarr",
     "repo": "Huber-group-EMBL/Rarr",
     "language": "R",
-    "cli_repo": "Bisaloo/Rarr-cli",
+    "cli_repo": "Huber-group-EMBL/Rarr",
     "conformance_workflow": "conformance-ci.yaml" 
   },
   {
@@ -21,4 +21,3 @@
     "conformance_workflow": "conformance.yml"
   }
 ]
- 
