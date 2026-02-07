@@ -22,14 +22,32 @@ runs:
       env:
         ZARR_CLI: ${{ inputs.zarr-cli }}
         ZARR_CONFORMANCE_DATA: ${{ github.action_path }}/data
+        TERM: xterm  # Fix for tput error
       run: |
+        echo "=== Environment ==="
         echo "ZARR_CLI: $ZARR_CLI"
         echo "ZARR_CONFORMANCE_DATA: $ZARR_CONFORMANCE_DATA"
+        echo "GITHUB_ACTION_PATH: ${GITHUB_ACTION_PATH}"
+        echo ""
         
-        # Use --formatter pretty for human-readable output with details
-        bats --formatter pretty --print-output-on-failure ${GITHUB_ACTION_PATH}/tests.sh | tee conformance-test-output.txt
-        bats --tap ${GITHUB_ACTION_PATH}/tests.sh > conformance-test-results.tap || true
-      
+        # Run tests with TAP output to both file and console
+        echo "=== Running Tests ==="
+        set +e
+        bats --tap ${GITHUB_ACTION_PATH}/tests.sh 2>&1 | tee conformance-test-results.tap
+        TEST_EXIT_CODE=${PIPESTATUS[0]}
+        set -e
+        
+        echo ""
+        echo "=== Summary ==="
+        echo "Tests exit code: $TEST_EXIT_CODE"
+        
+        if [ $TEST_EXIT_CODE -ne 0 ]; then
+          echo "❌ Tests failed or encountered errors"
+          exit $TEST_EXIT_CODE
+        else
+          echo "✅ All tests passed"
+        fi
+        
     - name: "Upload test results"
       if: always()
       uses: actions/upload-artifact@v5
