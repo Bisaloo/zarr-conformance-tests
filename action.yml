@@ -19,7 +19,6 @@ runs:
       env:
         ZARR_CLI: ${{ inputs.zarr-cli }}
         ZARR_CONFORMANCE_DATA: ${{ github.action_path }}/data
-        TERM: xterm  # Fix for tput error
       run: |
         echo "=== Environment ==="
         echo "ZARR_CLI: $ZARR_CLI"
