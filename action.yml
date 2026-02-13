@@ -8,9 +8,6 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - name: "Checkout repository"
-      uses: actions/checkout@v5
-
     - name: "Install testing framework"
       shell: bash
       run: |
@@ -23,8 +20,30 @@ runs:
         ZARR_CLI: ${{ inputs.zarr-cli }}
         ZARR_CONFORMANCE_DATA: ${{ github.action_path }}/data
       run: |
-        bats --tap ${GITHUB_ACTION_PATH}/tests.sh > conformance-test-results.tap
-
+        echo "=== Environment ==="
+        echo "ZARR_CLI: $ZARR_CLI"
+        echo "ZARR_CONFORMANCE_DATA: $ZARR_CONFORMANCE_DATA"
+        echo "GITHUB_ACTION_PATH: ${GITHUB_ACTION_PATH}"
+        echo ""
+        
+        # Run tests with TAP output to both file and console
+        echo "=== Running Tests ==="
+        set +e
+        bats --tap ${GITHUB_ACTION_PATH}/tests.sh 2>&1 | tee conformance-test-results.tap
+        TEST_EXIT_CODE=${PIPESTATUS[0]}
+        set -e
+        
+        echo ""
+        echo "=== Summary ==="
+        echo "Tests exit code: $TEST_EXIT_CODE"
+        
+        if [ $TEST_EXIT_CODE -ne 0 ]; then
+          echo "❌ Tests failed or encountered errors"
+          exit $TEST_EXIT_CODE
+        else
+          echo "✅ All tests passed"
+        fi
+        
     - name: "Upload test results"
       if: always()
       uses: actions/upload-artifact@v5
