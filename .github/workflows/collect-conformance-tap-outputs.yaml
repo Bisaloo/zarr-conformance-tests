@@ -30,20 +30,21 @@ jobs:
             mkdir -p "outputs/$name"
             cd "outputs/$name"
             # Overwrite existing results
-            find . -name conformance-test-results.tap -type f -delete
-            # Save test output (TAP file)
+            find . -name conformance-test-results.xml -type f -delete
+            # Save test output (JUnit XML file)
             gh run download -n conformance-test-results -R "$repo"
+            mv report.xml conformance-test-results.xml
             # Save last run metadata (link and date)
             gh run list -R "$repo" -w "$workflow" --limit 1 --json createdAt,url >| last-run-metadata.json
             cd ../..
           done
       
-      - name: Commit collected TAP files & metadata
+      - name: Commit collected files & metadata
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add outputs/*
-          git commit -m "Collect conformance test TAP outputs" || echo "No changes to commit"
+          git commit -m "Collect conformance test outputs" || echo "No changes to commit"
           git push origin HEAD:main
 
       - name: Re-render website

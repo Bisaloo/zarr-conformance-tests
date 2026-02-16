@@ -26,10 +26,10 @@ runs:
         echo "GITHUB_ACTION_PATH: ${GITHUB_ACTION_PATH}"
         echo ""
         
-        # Run tests with TAP output to both file and console
+        # Run tests with JUnit output to both file and console
         echo "=== Running Tests ==="
         set +e
-        bats --tap ${GITHUB_ACTION_PATH}/tests.bats 2>&1 | tee conformance-test-results.tap
+        bats --report-formatter junit ${GITHUB_ACTION_PATH}/tests.bats
         TEST_EXIT_CODE=${PIPESTATUS[0]}
         set -e
         
@@ -49,4 +49,4 @@ runs:
       uses: actions/upload-artifact@v5
       with:
         name: conformance-test-results
-        path: conformance-test-results.tap
+        path: report.xml
