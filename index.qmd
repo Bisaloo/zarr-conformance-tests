@@ -4,40 +4,39 @@ title: "Zarr features supported by different implementations"
 
 ```{r}
 #| echo: false
-read_tap <- function(path) {
-  lines <- readLines(path)
-
-  # Number of tests. FIXME: take this into account in the future.
-  lines <- lines[-1]
-
-  tests <- lines[!startsWith(lines, "#")]
-
-  status <- gsub("((not )?ok) .*", "\\1", tests)
-  test_number <- as.integer(gsub("((not )?ok) ([0-9]+).*", "\\3", tests))
-  test_name <- gsub("((not )?ok) ([0-9]+) (.*)", "\\4", tests)
-
+read_junit <- function(path) {
+  doc <- xml2::read_xml(path)
+  testcases <- xml2::xml_find_all(doc, ".//testcase")
+  statuses <- purrr::map_chr(testcases, function(testcase) {
+    failure_or_error <- length(xml2::xml_find_all(testcase, "./failure | ./error")) > 0
+    if (failure_or_error) {
+      "not ok"
+    } else {
+      "ok"
+    }
+  })
   setNames(
-    factor(status, levels = c("ok", "not ok")),
-    test_name
+    factor(statuses, levels = c("ok", "not ok")),
+    xml2::xml_attr(testcases, "name")
   )
 }
 ```
 
 ```{r}
 #| echo: false
-taps <- fs::dir_ls("outputs") |> 
+test_results <- fs::dir_ls("outputs") |> 
   rlang::set_names(~ basename(.x)) |> 
   purrr::imap(function(implementation_path, implementation_name) {
-    tap <- read_tap(file.path(implementation_path, "conformance-test-results.tap"))
+    junit <- read_junit(file.path(implementation_path, "conformance-test-results.xml"))
     metadata <- jsonlite::read_json(file.path(implementation_path, "last-run-metadata.json"), simplify = TRUE)
-    data.frame(implementation = implementation_name, metadata, as.list(tap), check.names = FALSE)
+    data.frame(implementation = implementation_name, metadata, as.list(junit), check.names = FALSE)
   })
-merged_tap <- dplyr::bind_rows(taps)
+merged_results <- dplyr::bind_rows(test_results)
 ```
 
 ```{r}
 #| echo: false
-merged_tap |> 
+merged_results |> 
   dplyr::mutate(
     `last run` = glue::glue("[{format(as.POSIXct(createdAt))}]({url})"),
     .after = 1,
