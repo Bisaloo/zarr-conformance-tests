@@ -29,7 +29,7 @@ runs:
         # Run tests with JUnit output to both file and console
         echo "=== Running Tests ==="
         set +e
-        bats --report-formatter junit ${GITHUB_ACTION_PATH}/tests.bats
+        bats --report-formatter junit --timing ${GITHUB_ACTION_PATH}/tests.bats
         TEST_EXIT_CODE=${PIPESTATUS[0]}
         set -e
         
