@@ -29,7 +29,7 @@ runs:
         # Run tests with TAP output to both file and console
         echo "=== Running Tests ==="
         set +e
-        bats --tap ${GITHUB_ACTION_PATH}/tests.sh 2>&1 | tee conformance-test-results.tap
+        bats --tap ${GITHUB_ACTION_PATH}/tests.bats 2>&1 | tee conformance-test-results.tap
         TEST_EXIT_CODE=${PIPESTATUS[0]}
         set -e
         
