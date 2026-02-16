@@ -2,6 +2,13 @@
 
 set -eu
 
+setup() {
+  if [ -z "${ZARR_CLI:-}" ] || [ -z "${ZARR_CONFORMANCE_DATA:-}" ]; then
+    echo "ZARR_CLI and ZARR_CONFORMANCE_DATA must be set to run the conformance tests"
+    return 1
+  fi
+}
+
 @test "read int64 - v2" {
   run $ZARR_CLI --array_path=$ZARR_CONFORMANCE_DATA/int64.zarr
   [ "$status" -eq 0 ]
