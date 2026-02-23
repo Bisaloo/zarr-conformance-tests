@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites time="1.837">
+<testsuite name="tests.bats" tests="6" failures="0" errors="0" skipped="0" time="1.837" timestamp="2026-02-22T05:00:35" hostname="runnervmwffz4">
+    <testcase classname="tests.bats" name="read int64 - v2" time="0.369" />
+    <testcase classname="tests.bats" name="read int32 - v2" time="0.296" />
+    <testcase classname="tests.bats" name="read int32 - v3" time="0.288" />
+    <testcase classname="tests.bats" name="read float64 - v2" time="0.299" />
+    <testcase classname="tests.bats" name="read float32 - v2" time="0.294" />
+    <testcase classname="tests.bats" name="read bool - v2" time="0.291" />
+
+</testsuite>
+</testsuites>
