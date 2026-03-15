@@ -19,5 +19,12 @@
     "language": "Rust",
     "cli_repo": "zarrs/zarrs",
     "conformance_workflow": "conformance.yml"
+  },
+  {
+    "name": "pizzarr",
+    "repo": "zarr-developers/pizzarr",
+    "language": "R",
+    "cli_repo": "zarr-developers/pizzarr",
+    "conformance_workflow": "conformance.yml"
   }
 ]
