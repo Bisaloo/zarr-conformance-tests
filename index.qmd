@@ -19,10 +19,10 @@ read_junit <- function(path) {
       as.numeric(xml2::xml_attr(successes, "time")), 
       as.numeric(xml2::xml_attr(failures, "time"))
     ),
-    result = c(
+    result = as.factor(c(
       rep("ok", length(successes)), 
       rep("not ok", length(failures))
-    )
+    )), levels = c("ok", "not ok")
   )
 }  
 ```
@@ -33,7 +33,10 @@ test_results <- fs::dir_ls("outputs") |>
   rlang::set_names(~ basename(.x)) |> 
   purrr::imap(function(implementation_path, implementation_name) {
     junit <- read_junit(file.path(implementation_path, "conformance-test-results.xml"))
-    metadata <- jsonlite::read_json(file.path(implementation_path, "last-run-metadata.json"), simplify = TRUE)
+    metadata <- jsonlite::read_json(
+      file.path(implementation_path, "last-run-metadata.json"), 
+      simplifyVector = TRUE
+    )
     cbind(
       implementation = implementation_name,
       junit,
@@ -67,8 +70,8 @@ merged_results |>
   gt::data_color(
     columns = -dplyr::any_of(c("implementation", "last run")),
     palette = c(
-      "ok" = "lightgreen",
-      "not ok" = "salmon"
-    )  
+      "salmon",
+      "lightgreen"
+    )
   )
 ```
