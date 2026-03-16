@@ -48,16 +48,30 @@ merged_results <- dplyr::bind_rows(test_results)
 ```
 
 ```{r}
+implementation_metadata <- jsonlite::read_json(
+  "implementations.json", 
+  simplifyVector = TRUE
+) |> 
+  dplyr::select(name, repo, language)
+```
+
+```{r}
 #| echo: false
 merged_results |> 
+  dplyr::left_join(
+    implementation_metadata, 
+    by = c("implementation" = "name")
+  ) |> 
   dplyr::mutate(
-    result = as.character(result),
     result_with_time = glue::glue(
       "{result}<br><i><small>({formatC(time, format = 'f', digits = 3)} s)</small></i>"
-    )
+    ),
+    implementation = glue::glue("[{implementation}](https://github.com/{repo})"),
+    # To get the correct icon
+    language = dplyr::if_else(language == "R", "r-project", language)
   ) |> 
   tidyr::pivot_wider(
-    id_cols = c("implementation", "url", "createdAt"),
+    id_cols = c("implementation", "url", "createdAt", "language"),
     names_from = "feature",
     values_from = "result_with_time"
   ) |> 
@@ -73,8 +87,11 @@ merged_results |>
   gt::fmt_markdown(
     columns = dplyr::everything()
   ) |> 
+  gt::fmt_icon(
+    columns = "language"
+  ) |> 
   gt::data_color(
-    columns = -dplyr::any_of(c("implementation", "last run")),
+    columns = -dplyr::any_of(c("implementation", "last run", "language")),
     fn = function(x) {
       dplyr::if_else(grepl("^ok", x), "lightgreen", "salmon")
     }
