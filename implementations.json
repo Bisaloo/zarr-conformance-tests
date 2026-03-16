@@ -7,7 +7,7 @@
     "conformance_workflow": "conformance-ci.yaml" 
   },
   {
-    "name": "zarr",
+    "name": "zarr-python",
     "repo": "zarr-developers/zarr-python",
     "language": "Python",
     "cli_repo": "Bisaloo/zarr-python-cli",
