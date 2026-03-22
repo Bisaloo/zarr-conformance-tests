@@ -101,3 +101,9 @@ implementation can be found in the following repositories:
 
 - [Rarr R implementation](https://github.com/Huber-group-EMBL/Rarr)
 - [Zarr python implementation (unofficial minimal CLI wrapper around the official lib)](https://github.com/Bisaloo/zarr-python-cli)
+
+## Acknowledgements
+
+This project was started as a hackathon project during the Zarr Summit 2025 in Rome.
+
+Thanks to the organizers and the funders!
