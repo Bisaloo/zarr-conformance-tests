@@ -4,6 +4,6 @@
     "href": "index.html",
     "title": "Zarr features supported by different implementations",
     "section": "",
-    "text": "Test Results Across Implementations\n\n\nimplementation\nlast run\nlanguage\nread int64 - v2\nread int32 - v2\nread int32 - v3\nread float64 - v2\nread float32 - v2\nread bool - v2\n\n\n\n\nRarr\n2026-03-21\n\n\n\nR Project\n\n\n\n\nok(0.516 s)\nok(0.505 s)\nok(0.512 s)\nok(0.519 s)\nok(0.518 s)\nok(0.518 s)\n\n\npizzarr\n2026-03-16\n\n\n\nR Project\n\n\n\n\nok(0.622 s)\nok(0.588 s)\nok(0.562 s)\nok(0.580 s)\nok(0.581 s)\nok(0.556 s)\n\n\nzarr-python\n2026-03-15\n\n\n\nPython\n\n\n\n\nok(0.396 s)\nok(0.297 s)\nok(0.294 s)\nok(0.303 s)\nok(0.298 s)\nok(0.291 s)\n\n\nzarrs\n2026-03-22\n\n\n\nRust\n\n\n\n\nok(0.011 s)\nok(0.033 s)\nok(0.013 s)\nok(0.046 s)\nok(0.040 s)\nok(0.010 s)"
+    "text": "Test Results Across Implementations\n\n\nimplementation\nlast run\nlanguage\nread int64 - v2\nread int32 - v2\nread int32 - v3\nread float64 - v2\nread float32 - v2\nread bool - v2\n\n\n\n\nRarr\n2026-03-21\n\n\n\nR Project\n\n\n\n\nok(0.516 s)\nok(0.505 s)\nok(0.512 s)\nok(0.519 s)\nok(0.518 s)\nok(0.518 s)\n\n\npizzarr\n2026-03-16\n\n\n\nR Project\n\n\n\n\nok(0.622 s)\nok(0.588 s)\nok(0.562 s)\nok(0.580 s)\nok(0.581 s)\nok(0.556 s)\n\n\nzarr-python\n2026-03-22\n\n\n\nPython\n\n\n\n\nok(0.325 s)\nok(0.300 s)\nok(0.296 s)\nok(0.299 s)\nok(0.304 s)\nok(0.295 s)\n\n\nzarrs\n2026-03-22\n\n\n\nRust\n\n\n\n\nok(0.011 s)\nok(0.029 s)\nok(0.010 s)\nok(0.045 s)\nok(0.044 s)\nok(0.009 s)"
   }
 ]
