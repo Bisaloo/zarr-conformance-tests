@@ -26,5 +26,12 @@
     "language": "R",
     "cli_repo": "zarr-developers/pizzarr",
     "conformance_workflow": "conformance.yml"
+  },
+  {
+    "name": "zaro",
+    "repo": "hypertidy/zaro",
+    "language": "R",
+    "cli_repo": "hypertidy/zaro",
+    "conformance_workflow": "conformance-ci.yaml"
   }
 ]
