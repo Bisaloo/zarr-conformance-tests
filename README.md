@@ -104,6 +104,6 @@ implementation can be found in the following repositories:
 
 ## Acknowledgements
 
-This project was started as a hackathon project during the Zarr Summit 2025 in Rome.
+This project was started as a hackathon project during the [Zarr Summit 2025](https://zarr.dev/zarr-summit-2025/) in Rome.
 
 Thanks to the organizers and the funders!
