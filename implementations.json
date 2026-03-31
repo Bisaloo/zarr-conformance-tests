@@ -33,5 +33,12 @@
     "language": "R",
     "cli_repo": "hypertidy/zaro",
     "conformance_workflow": "conformance-ci.yaml"
+  },
+  {
+    "name": "zarr-java",
+    "repo": "zarr-developers/zarr-java",
+    "language": "Java",
+    "cli_repo": "zarr-developers/zarr-java",
+    "conformance_workflow": "conformance.yml"
   }
 ]
