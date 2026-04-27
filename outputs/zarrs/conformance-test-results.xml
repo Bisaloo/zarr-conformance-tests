@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites time="0.108">
-<testsuite name="tests.bats" tests="6" failures="0" errors="0" skipped="0" time="0.108" timestamp="2026-04-19T05:38:07" hostname="runnervmeorf1">
+<testsuites time="0.105">
+<testsuite name="tests.bats" tests="6" failures="0" errors="0" skipped="0" time="0.105" timestamp="2026-04-26T05:47:49" hostname="runnervmeorf1">
     <testcase classname="tests.bats" name="read int64 - v2" time="0.009" />
-    <testcase classname="tests.bats" name="read int32 - v2" time="0.025" />
+    <testcase classname="tests.bats" name="read int32 - v2" time="0.022" />
     <testcase classname="tests.bats" name="read int32 - v3" time="0.009" />
     <testcase classname="tests.bats" name="read float64 - v2" time="0.028" />
     <testcase classname="tests.bats" name="read float32 - v2" time="0.028" />
