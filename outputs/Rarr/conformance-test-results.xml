@@ -1,30 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites time="2.819">
-<testsuite name="tests.bats" tests="6" failures="6" errors="0" skipped="0" time="2.819" timestamp="2026-04-25T17:38:07" hostname="runnervmeorf1">
-    <testcase classname="tests.bats" name="read int64 - v2" time="0.467">
-        <failure type="failure">(in test file /home/runner/work/_actions/Bisaloo/zarr-conformance-tests/v0.0.2/tests.bats, line 14)
-  `[ &quot;$status&quot; -eq 0 ]&#39; failed</failure>
-    </testcase>
-    <testcase classname="tests.bats" name="read int32 - v2" time="0.464">
-        <failure type="failure">(in test file /home/runner/work/_actions/Bisaloo/zarr-conformance-tests/v0.0.2/tests.bats, line 19)
-  `[ &quot;$status&quot; -eq 0 ]&#39; failed</failure>
-    </testcase>
-    <testcase classname="tests.bats" name="read int32 - v3" time="0.470">
-        <failure type="failure">(in test file /home/runner/work/_actions/Bisaloo/zarr-conformance-tests/v0.0.2/tests.bats, line 24)
-  `[ &quot;$status&quot; -eq 0 ]&#39; failed</failure>
-    </testcase>
-    <testcase classname="tests.bats" name="read float64 - v2" time="0.473">
-        <failure type="failure">(in test file /home/runner/work/_actions/Bisaloo/zarr-conformance-tests/v0.0.2/tests.bats, line 29)
-  `[ &quot;$status&quot; -eq 0 ]&#39; failed</failure>
-    </testcase>
-    <testcase classname="tests.bats" name="read float32 - v2" time="0.470">
-        <failure type="failure">(in test file /home/runner/work/_actions/Bisaloo/zarr-conformance-tests/v0.0.2/tests.bats, line 34)
-  `[ &quot;$status&quot; -eq 0 ]&#39; failed</failure>
-    </testcase>
-    <testcase classname="tests.bats" name="read bool - v2" time="0.475">
-        <failure type="failure">(in test file /home/runner/work/_actions/Bisaloo/zarr-conformance-tests/v0.0.2/tests.bats, line 39)
-  `[ &quot;$status&quot; -eq 0 ]&#39; failed</failure>
-    </testcase>
+<testsuites time="2.708">
+<testsuite name="tests.bats" tests="6" failures="0" errors="0" skipped="0" time="2.708" timestamp="2026-04-27T20:34:41" hostname="runnervmeorf1">
+    <testcase classname="tests.bats" name="read int64 - v2" time="0.451" />
+    <testcase classname="tests.bats" name="read int32 - v2" time="0.450" />
+    <testcase classname="tests.bats" name="read int32 - v3" time="0.451" />
+    <testcase classname="tests.bats" name="read float64 - v2" time="0.450" />
+    <testcase classname="tests.bats" name="read float32 - v2" time="0.455" />
+    <testcase classname="tests.bats" name="read bool - v2" time="0.451" />
 
 </testsuite>
 </testsuites>
