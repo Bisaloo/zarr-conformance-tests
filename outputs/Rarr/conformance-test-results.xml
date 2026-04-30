@@ -1,12 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites time="2.687">
-<testsuite name="tests.bats" tests="6" failures="0" errors="0" skipped="0" time="2.687" timestamp="2026-04-28T20:03:33" hostname="runnervmeorf1">
-    <testcase classname="tests.bats" name="read int64 - v2" time="0.448" />
-    <testcase classname="tests.bats" name="read int32 - v2" time="0.449" />
-    <testcase classname="tests.bats" name="read int32 - v3" time="0.448" />
-    <testcase classname="tests.bats" name="read float64 - v2" time="0.446" />
-    <testcase classname="tests.bats" name="read float32 - v2" time="0.448" />
-    <testcase classname="tests.bats" name="read bool - v2" time="0.448" />
+<testsuites time="2.751">
+<testsuite name="tests.bats" tests="6" failures="6" errors="0" skipped="0" time="2.751" timestamp="2026-04-29T17:05:51" hostname="runnervmeorf1">
+    <testcase classname="tests.bats" name="read int64 - v2" time="0.456">
+        <failure type="failure">(in test file /home/runner/work/_actions/Bisaloo/zarr-conformance-tests/v0.0.2/tests.bats, line 14)
+  `[ &quot;$status&quot; -eq 0 ]&#39; failed</failure>
+    </testcase>
+    <testcase classname="tests.bats" name="read int32 - v2" time="0.458">
+        <failure type="failure">(in test file /home/runner/work/_actions/Bisaloo/zarr-conformance-tests/v0.0.2/tests.bats, line 19)
+  `[ &quot;$status&quot; -eq 0 ]&#39; failed</failure>
+    </testcase>
+    <testcase classname="tests.bats" name="read int32 - v3" time="0.461">
+        <failure type="failure">(in test file /home/runner/work/_actions/Bisaloo/zarr-conformance-tests/v0.0.2/tests.bats, line 24)
+  `[ &quot;$status&quot; -eq 0 ]&#39; failed</failure>
+    </testcase>
+    <testcase classname="tests.bats" name="read float64 - v2" time="0.460">
+        <failure type="failure">(in test file /home/runner/work/_actions/Bisaloo/zarr-conformance-tests/v0.0.2/tests.bats, line 29)
+  `[ &quot;$status&quot; -eq 0 ]&#39; failed</failure>
+    </testcase>
+    <testcase classname="tests.bats" name="read float32 - v2" time="0.456">
+        <failure type="failure">(in test file /home/runner/work/_actions/Bisaloo/zarr-conformance-tests/v0.0.2/tests.bats, line 34)
+  `[ &quot;$status&quot; -eq 0 ]&#39; failed</failure>
+    </testcase>
+    <testcase classname="tests.bats" name="read bool - v2" time="0.460">
+        <failure type="failure">(in test file /home/runner/work/_actions/Bisaloo/zarr-conformance-tests/v0.0.2/tests.bats, line 39)
+  `[ &quot;$status&quot; -eq 0 ]&#39; failed</failure>
+    </testcase>
 
 </testsuite>
 </testsuites>
