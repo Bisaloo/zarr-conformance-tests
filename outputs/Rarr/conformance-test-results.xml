@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites time="3.059">
-<testsuite name="tests.bats" tests="6" failures="0" errors="0" skipped="0" time="3.059" timestamp="2026-08-15T16:49:27" hostname="runnervmzvulz">
-    <testcase classname="tests.bats" name="read int64 - v2" time="0.511" />
-    <testcase classname="tests.bats" name="read int32 - v2" time="0.508" />
-    <testcase classname="tests.bats" name="read int32 - v3" time="0.506" />
-    <testcase classname="tests.bats" name="read float64 - v2" time="0.508" />
-    <testcase classname="tests.bats" name="read float32 - v2" time="0.514" />
-    <testcase classname="tests.bats" name="read bool - v2" time="0.512" />
+<testsuites time="3.085">
+<testsuite name="tests.bats" tests="6" failures="0" errors="0" skipped="0" time="3.085" timestamp="2026-08-17T13:38:57" hostname="runnervmzvulz">
+    <testcase classname="tests.bats" name="read int64 - v2" time="0.509" />
+    <testcase classname="tests.bats" name="read int32 - v2" time="0.507" />
+    <testcase classname="tests.bats" name="read int32 - v3" time="0.504" />
+    <testcase classname="tests.bats" name="read float64 - v2" time="0.513" />
+    <testcase classname="tests.bats" name="read float32 - v2" time="0.543" />
+    <testcase classname="tests.bats" name="read bool - v2" time="0.509" />
 
 </testsuite>
 </testsuites>
